@@ -19,7 +19,7 @@
  *   along with shapeless-serialization.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pickle
+package com.github.harveywi.pickling
 
 import org.scalatest._
 import org.scalatest.matchers.ShouldMatchers
@@ -27,129 +27,127 @@ import shapeless._
 import java.io._
 import scala.util.matching.Regex
 
-object IsoPicklableSpec {
+object IsoPicklableNoBPSpec {
   case class TestInt(x: Int)
-  object TestInt extends IsoPicklable[TestInt, Int :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestInt extends IsoPicklableNoBP[TestInt] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testInt = TestInt(42)
 
   case class TestString(s: String)
-  object TestString extends IsoPicklable[TestString, String :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestString extends IsoPicklableNoBP[TestString] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testString = TestString("Hello")
 
   case class TestBoolean(b: Boolean)
-  object TestBoolean extends IsoPicklable[TestBoolean, Boolean :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestBoolean extends IsoPicklableNoBP[TestBoolean] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testBooleanTrue = TestBoolean(true)
   val testBooleanFalse = TestBoolean(false)
 
   case class TestFloat(f: Float)
-  object TestFloat extends IsoPicklable[TestFloat, Float :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestFloat extends IsoPicklableNoBP[TestFloat] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testFloat = TestFloat(123.456f)
 
   case class TestDouble(d: Double)
-  object TestDouble extends IsoPicklable[TestDouble, Double :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestDouble extends IsoPicklableNoBP[TestDouble] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testDouble = TestDouble(789.123)
   
-  // short
   case class TestShort(s: Short)
-  object TestShort extends IsoPicklable[TestShort, Short :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestShort extends IsoPicklableNoBP[TestShort] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testShort = TestShort(100.toShort)
   
-  // long
   case class TestLong(l: Long)
-  object TestLong extends IsoPicklable[TestLong, Long :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestLong extends IsoPicklableNoBP[TestLong] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testLong = TestLong(42L)
 
   case class TestRegex(r: Regex)
-  object TestRegex extends IsoPicklable[TestRegex, Regex :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestRegex extends IsoPicklableNoBP[TestRegex] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testRegex = TestRegex("\\s+".r)
 
   case class TestChar(c: Char)
-  object TestChar extends IsoPicklable[TestChar, Char :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestChar extends IsoPicklableNoBP[TestChar] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testChar = TestChar('x')
 
   case class TestFile(f: File)
-  object TestFile extends IsoPicklable[TestFile, File :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestFile extends IsoPicklableNoBP[TestFile] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testFile = TestFile(new File("/dev/null"))
 
   case class TestOption(x: Option[Int])
-  object TestOption extends IsoPicklable[TestOption, Option[Int] :: HNil] {
-    implicit val iso = IsoPicklable.createIso[TestOption, Option[Int]](apply _, unapply _)
+  object TestOption extends IsoPicklableNoBP[TestOption] {
+    val isoContainer = createIsoContainer.apply1(apply _, unapply _)
   }
   val testOptionSome = TestOption(Some(42))
   val testOptionNone = TestOption(None)
 
   case class TestTuple2(t: (Int, String))
-  object TestTuple2 extends IsoPicklable[TestTuple2, (Int, String) :: HNil] {
-    implicit val iso = IsoPicklable.createIso[TestTuple2, (Int, String)](apply _, unapply _)
+  object TestTuple2 extends IsoPicklableNoBP[TestTuple2] {
+    val isoContainer = createIsoContainer.apply1(apply _, unapply _)
   }
   val testTuple2 = TestTuple2((42, "Hello"))
   
   case class TestArray(arr: Array[String])
-  object TestArray extends IsoPicklable[TestArray, Array[String] :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestArray extends IsoPicklableNoBP[TestArray] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testArray = TestArray(Array("Hello", "World"))
   
   case class TestSeq(seq: Seq[Long])
-  object TestSeq extends IsoPicklable[TestSeq, Seq[Long] :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestSeq extends IsoPicklableNoBP[TestSeq] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testSeq = TestSeq(Seq(1L, 2L, 3L))
   
   case class TestMap(map: Map[String, Double])
-  object TestMap extends IsoPicklable[TestMap, Map[String, Double] :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestMap extends IsoPicklableNoBP[TestMap] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testMap = TestMap(Map("Hello" -> 42.0, "World" -> 100.0))
   
   // Here's some more complicated test cases
   case class TestLotsOfParameters(xInt: Int, xString: String, xLong: Long, xOptionFloat: Option[Float], xSeqDouble: Seq[Double])
-  object TestLotsOfParameters extends IsoPicklable[TestLotsOfParameters, Int :: String :: Long :: Option[Float] :: Seq[Double] :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestLotsOfParameters extends IsoPicklableNoBP[TestLotsOfParameters] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testLotsOfParameters = TestLotsOfParameters(42, "Hello", 100L, Some(12f), Seq(1.0, 2.0, 3.0, 4.0, 5.0))
   
   case class TestNestedCaseClasses1(testInt: TestInt, testDouble: TestDouble)
-  object TestNestedCaseClasses1 extends IsoPicklable[TestNestedCaseClasses1, TestInt :: TestDouble :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestNestedCaseClasses1 extends IsoPicklableNoBP[TestNestedCaseClasses1] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testNestedCaseClasses1 = TestNestedCaseClasses1(TestInt(42), TestDouble(100.0))
   
   case class TestNestedCaseClasses2(testNestedCaseClasses1: TestNestedCaseClasses1)
-  object TestNestedCaseClasses2 extends IsoPicklable[TestNestedCaseClasses2, TestNestedCaseClasses1 :: HNil] {
-    implicit val iso = IsoPicklable.createIso[TestNestedCaseClasses2, TestNestedCaseClasses1](apply _, unapply _)
+  object TestNestedCaseClasses2 extends IsoPicklableNoBP[TestNestedCaseClasses2] {
+    val isoContainer = createIsoContainer.apply1(apply _, unapply _)
   }
   val testNestedCaseClasses2 = TestNestedCaseClasses2(testNestedCaseClasses1)
   
   case class TestLotsOfParameters2(testOption: TestOption, testTuple2: TestTuple2)
-  object TestLotsOfParameters2 extends IsoPicklable[TestLotsOfParameters2, TestOption :: TestTuple2 :: HNil] {
-    implicit val iso = IsoPicklable.createIso(apply _, unapply _)
+  object TestLotsOfParameters2 extends IsoPicklableNoBP[TestLotsOfParameters2] {
+    val isoContainer = createIsoContainer(apply _, unapply _)
   }
   val testLotsOfParameters2 = TestLotsOfParameters2(TestOption(Some(100)), TestTuple2((100, "asdf")))
   
   case class TestNestedCaseClasses3(testLotsOfParameters2: TestLotsOfParameters2)
-  object TestNestedCaseClasses3 extends IsoPicklable[TestNestedCaseClasses3, TestLotsOfParameters2 :: HNil] {
-    implicit val iso = IsoPicklable.createIso1(apply _, unapply _)
+  object TestNestedCaseClasses3 extends IsoPicklableNoBP[TestNestedCaseClasses3] {
+    val isoContainer = createIsoContainer.apply1(apply _, unapply _)
   }
   val testNestedCaseClasses3 = TestNestedCaseClasses3(TestLotsOfParameters2(TestOption(Some(42)), TestTuple2((42, "Hello"))))
 
@@ -172,8 +170,8 @@ object IsoPicklableSpec {
 
 }
 
-class IsoPicklableSpec extends FlatSpec with ShouldMatchers {
-  import IsoPicklableSpec._
+class IsoPicklableNoBPSpec extends FlatSpec with ShouldMatchers {
+  import IsoPicklableNoBPSpec._
   
   def makeTest[T](t: T, msg: String, unpickler: DataInputStream => T)(implicit u: T => Picklable) = {
     s"$msg ($t)" should "pickle and unpickle properly" in {

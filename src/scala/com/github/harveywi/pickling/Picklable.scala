@@ -19,13 +19,12 @@
  *   along with shapeless-serialization.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pickle
+package com.github.harveywi.pickling
 
-import java.io._
-import shapeless._
+import java.io.DataOutputStream
 
-trait Unpickler[T] {
-  def unpickle(dais: DataInputStream): T
+trait Picklable {
+  def pickle(daos: DataOutputStream): Unit
 }
 
-object Unpickler extends DefaultUnpicklers 
+object Picklable extends DefaultPicklables

@@ -19,7 +19,7 @@
  *   along with shapeless-serialization.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pickle
+package com.github.harveywi.pickling
 
 import java.io._
 

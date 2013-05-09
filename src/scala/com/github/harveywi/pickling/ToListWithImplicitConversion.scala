@@ -19,12 +19,21 @@
  *   along with shapeless-serialization.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package pickle
+package com.github.harveywi.pickling
 
-import java.io.DataOutputStream
+import shapeless._
 
-trait Picklable {
-  def pickle(daos: DataOutputStream): Unit
+trait ToListWithImplicitConversion[L <: HList, B] {
+  def apply(l: L): List[B]
 }
 
-object Picklable extends DefaultPicklables
+object ToListWithImplicitConversion {
+  implicit def hnilToListWithConversion[B]: ToListWithImplicitConversion[HNil, B] = new ToListWithImplicitConversion[HNil, B] {
+    def apply(l: HNil) = Nil
+  }
+
+  implicit def hlistToListWithConversion[H, T <: HList, B](implicit u: H => B, hlistToPicklable: ToListWithImplicitConversion[T, B]) =
+    new ToListWithImplicitConversion[H :: T, B] {
+      def apply(l: H :: T) = u(l.head) :: hlistToPicklable(l.tail)
+    }
+}
