@@ -61,6 +61,10 @@ Prerequisites
 --------------------------------
 This library requires Scala 2.10 and shapeless 1.2.3.
 
+Scaladoc
+--------------------------------
+Scaladoc is available [here](http://www.aylasoftware.org/shapeless-serialization/).
+
 ### Questions?  Comments?  Bugs?
 Feel free to contact me (harveywi at cse dot ohio-state dot edu).  Thanks!
 
