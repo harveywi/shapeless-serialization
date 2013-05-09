@@ -9,8 +9,7 @@ serializable (picklable) case classes using only a tad of boilerplate.
 The isomorphism between a case class and an HList, and generous use of implicits
 are the driving forces behind shapeless-serialization.
 
-This library is one part in a trilogy of shapeless-based libraries that I
-([William Harvey](http://www.cse.ohio-state.edu/~harveywi)) recently cooked up
+This library is one part in a trilogy of shapeless-based libraries that I recently cooked up
 to both deepen my understanding of Scala and to scratch some technical itches.
 I hope you find it useful and interesting!
 
