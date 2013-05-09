@@ -23,6 +23,16 @@ package com.github.harveywi.pickling
 
 import java.io._
 
+/**
+ * A trait for types which can pickle instances of type `T`.
+ * 
+ * @author William Harvey
+ */
 trait Pickler[T] {
+  /**
+   * Pickles an instance of type `T`.
+   * @param t instance to pickle
+   * @param daos stream in which t will be pickled
+   */
 	def pickle(t: T, daos: DataOutputStream): Unit
 }

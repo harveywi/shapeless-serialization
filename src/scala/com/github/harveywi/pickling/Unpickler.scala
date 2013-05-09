@@ -24,7 +24,16 @@ package com.github.harveywi.pickling
 import java.io._
 import shapeless._
 
+/**
+ * Types mixing in this trait advertise that they can unpickle instances of type `T`. 
+ */
 trait Unpickler[T] {
+  /**
+   * Unpickles an instance of type `T` from the specified stream.
+   * 
+   * @param dais stream providing an instance of type `T`
+   * @return unpickled instance of type `T`
+   */
   def unpickle(dais: DataInputStream): T
 }
 

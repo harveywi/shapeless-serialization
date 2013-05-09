@@ -23,7 +23,17 @@ package com.github.harveywi.pickling
 
 import java.io.DataOutputStream
 
+/**
+ * Indicates that instance of a class can pickle itself into a `DataOutputStream`.
+ * 
+ * @author William Harvey
+ */
 trait Picklable {
+  /**
+   * Pickles this instance.
+   * 
+   * @param daos stream into which this instance will be pickled
+   */
   def pickle(daos: DataOutputStream): Unit
 }
 

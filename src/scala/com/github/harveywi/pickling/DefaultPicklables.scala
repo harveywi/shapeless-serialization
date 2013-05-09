@@ -25,6 +25,10 @@ import java.io.{ DataOutputStream, File }
 import scala.util.matching.Regex
 import scala.reflect.ClassTag
 
+/**
+ * Contains default implicit conversions for transforming basic types (e.g. `Int`, `String`, `Option[_]`, ...) into instances of
+ * `Picklable`.
+ */
 trait DefaultPicklables {
   implicit class IntPicklable(x: Int) extends Picklable { def pickle(daos: DataOutputStream) = daos.writeInt(x) }
   implicit class StringPicklable(x: String) extends Picklable { def pickle(daos: DataOutputStream) = daos.writeUTF(x) }

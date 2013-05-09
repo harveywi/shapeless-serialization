@@ -23,6 +23,11 @@ package com.github.harveywi.pickling
 
 import shapeless._
 
+/**
+ * A witness that all elements of an HList are implicitly viewable as type `B`.
+ * 
+ * @author William Harvey
+ */
 trait ToListWithImplicitConversion[L <: HList, B] {
   def apply(l: L): List[B]
 }

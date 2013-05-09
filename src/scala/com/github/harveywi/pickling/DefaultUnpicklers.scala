@@ -28,6 +28,9 @@ import scala.util.matching.Regex
 import java.io.File
 import scala.reflect.ClassTag
 
+/**
+ * Contains default unpicklers for several basic types (e.g. `Int`, `String`, `Option[_]`, ...).
+ */
 trait DefaultUnpicklers {
   implicit def hNilUnpickler = new Unpickler[HNil] {
     def unpickle(dais: DataInputStream): HNil = HNil
